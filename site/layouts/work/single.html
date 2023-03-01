@@ -1,0 +1,13 @@
+{{ define "main" }}
+
+<div class="main-content portfolio-piece {{ .Page.File.TranslationBaseName }}">
+    <h2 class="heroboy spaceSemi">{{ .Params.title }}</h2>
+    <h3 class="main-intro spaceSemi">{{ .Params.intro }}</h3>
+    <div class="article-content">
+    {{ .Content }}
+    </div>
+  </div>
+
+{{ partial "footer" }}
+
+{{ end }}
