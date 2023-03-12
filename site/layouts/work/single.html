@@ -1,13 +1,13 @@
 {{ define "main" }}
 
-<div class="main-content portfolio-piece {{ .Page.File.TranslationBaseName }}">
-    <h2 class="heroboy spaceSemi">{{ .Params.title }}</h2>
-    <h3 class="main-intro spaceSemi">{{ .Params.intro }}</h3>
-    <div class="article-content">
-    {{ .Content }}
-    </div>
-  </div>
+{{ partial "jumbotron" (dict "imageUrl" .Params.image "title" .Title) }}
+<h2>{{ .Params.bio }}</h2>
+<div class="mw7 center ph3 pt4">
 
-{{ partial "footer" }}
+  {{ range $index, $element := .Params.work }}
+  {{ partial "media-block" $element }}
+  {{ end }}
 
+</div>
+{{ partial "footer"}}
 {{ end }}

@@ -1,13 +1,81 @@
 {{ define "main" }}
 
-{{ partial "jumbotron" (dict "imageUrl" .Params.image "title" .Title "subtitle" .Params.subtitle) }}
+<div class="wrapper">
+    <div class="content" role="main">
+        {{ partial "topmatter" (dict "title" .Params.title "bio" .Params.bio) }}
+    </div>
+    <div class="work-wrap">
+        {{ range $index, $element := .Params.work }}
+        <!-- start loop -->
+        {{ if eq .casesize "single" }}
+        <!-- begin single case -->
+        <div class='piece-wrap type--{{ .sizing }} {{ if eq .reverse "yes" }}reverse{{ else if eq .reverse "no" }}{{end}}'>
+            <div class="piece">
+              <div class="tags">
+                <a href="{{ .pagelink }}" target="_blank" class="active"
+                  >{{ .heading }}</a
+                >
+                <a href="{{.taglinkOne}}" target="_blank" class="tag">{{ .tagnameOne }}</a>
+                <a href="{{.taglinkTwo}}" target="_blank" class="tag">{{ .tagnameTwo }}</a>
+                <a href="{{.taglinkThree}}" target="_blank" class="tag">{{ .tagnamethree }}</a>
+                <a href="{{.taglinkFour}}" target="_blank" class="tag">{{ .tagnamefour }}</a>
+              </div>
+              <div class="media">
+                {{ if eq .type "image" }}
+      <img src="{{ .media }}"/>
+      {{ else if eq .type "video" }}
+      <script src="{{ .link }}" async></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><div class="wistia_embed wistia_async_tjdzsd7z5p seo=false videoFoam=true" style="height:100%;position:relative;width:100%"><div class="wistia_swatch" style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;"><img src="{{ .thumbnail }}" style="filter:blur(5px);height:100%;object-fit:contain;width:100%;" alt="" aria-hidden="true" onload="this.parentNode.style.opacity=1;" /></div></div></div></div>
+      {{ end }}
+            </div>
+          </div>
+        </div>
+          <!-- end single case-->
+          {{ else if eq .casesize "dual" }}
+          <div class='piece-wrap type--{{ .sizingOne }}-{{ .sizingTwo }} {{ if eq .reverse "yes" }}reverse{{ else if eq .reverse "no" }}{{end}}'>
+            <div class="piece">
+                <div class="tags">
+                  <a href="{{ .pagelinkOne }}" target="_blank" class="active"
+                    >{{ .headingOne }}</a
+                  >
+                 <a href="{{.pieceOnetaglinkOne}}" target="_blank" class="tag">{{ .pieceOnetagnameOne }}</a>
+                 <a href="{{.pieceOnetaglinkTwo}}" target="_blank" class="tag">{{ .pieceOnetagnameTwo }}</a>
+                 <a href="{{.pieceOnetaglinkThree}}" target="_blank" class="tag">{{ .pieceOnetagnamethree }}</a>
+                 <a href="{{.pieceOnetaglinkFour}}" target="_blank" class="tag">{{ .pieceOnetagnamefour }}</a>
+                </div>
+                <div class="media">
+                  {{ if eq .typeOne "image" }}
+        <img src="{{ .mediaOne }}"/>
+        {{ else if eq .typeOne "video" }}
+        <script src="{{ .link }}" async></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><div class="wistia_embed wistia_async_tjdzsd7z5p seo=false videoFoam=true" style="height:100%;position:relative;width:100%"><div class="wistia_swatch" style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;"><img src="{{ .thumbnail }}" style="filter:blur(5px);height:100%;object-fit:contain;width:100%;" alt="" aria-hidden="true" onload="this.parentNode.style.opacity=1;" /></div></div></div></div>
+        {{ end }}
+              </div>
+            </div>
+          <!-- start piece two -->
+          <div class="piece">
+            <div class="tags">
+              <a href="{{ .pagelinkTwo }}" target="_blank" class="active"
+                >{{ .headingTwo }}</a
+              >
+              <a href="{{.pieceTwotaglinkOne}}" target="_blank" class="tag">{{ .pieceTwotagnameOne }}</a>
+              <a href="{{.pieceTwotaglinkTwo}}" target="_blank" class="tag">{{ .pieceTwotagnameTwo }}</a>
+              <a href="{{.pieceTwotaglinkThree}}" target="_blank" class="tag">{{ .pieceTwotagnamethree }}</a>
+              <a href="{{.pieceTwotaglinkFour}}" target="_blank" class="tag">{{ .pieceTwotagnamefour }}</a>
+            </div>
+            <div class="media">
+              {{ if eq .typeTwo "image" }}
+    <img src="{{ .mediaTwo }}"/>
+    {{ else if eq .typeTwo "video" }}
+    <script src="{{ .link }}" async></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><div class="wistia_embed wistia_async_tjdzsd7z5p seo=false videoFoam=true" style="height:100%;position:relative;width:100%"><div class="wistia_swatch" style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;"><img src="{{ .thumbnail }}" style="filter:blur(5px);height:100%;object-fit:contain;width:100%;" alt="" aria-hidden="true" onload="this.parentNode.style.opacity=1;" /></div></div></div></div>
+    {{ end }}
+          </div>
+        </div>
+        </div>
+          {{ end }}
+          <!-- end dual case-->
+  {{ end }}
+    </div>
+</div>
 
-{{ partial "short-text" .Params.blurb}}
-
-{{ partial "2-up" .Params }}
-
-{{ partial "text-and-image" (dict "heading" .Params.values.heading "text" .Params.values.text "buttonText" "Read more" "buttonLink" "/values") }}
-
-{{ partial "blog" . }}
+{{ partial "footer"}}
 
 {{ end }}
